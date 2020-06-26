@@ -10,4 +10,5 @@ public interface AppointmentItemService {
     String addAppointmentItem(String itemName, Time startTime,Time closeTime,int taktTime,int advanceDay, int max_people);
     String editAppointmentItem(int id,String itemName, Time startTime,Time closeTime,int taktTime,int advanceDay, int max_people,int openAppointment);
     String deleteApponitmentItem(int id);
+    List<AppointmentItem> getOpenAppointmentItemList();
 }

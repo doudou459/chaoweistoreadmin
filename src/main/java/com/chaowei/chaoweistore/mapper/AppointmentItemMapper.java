@@ -21,4 +21,6 @@ public interface AppointmentItemMapper {
                               @Param("taktTime") int taktTime, @Param("advanceDay") int advanceDay, @Param("max_people") int max_people,@Param("openAppointment") int openAppointment);
     @Delete("DELETE FROM store_appointment_item WHERE id=#{id}")
     int deleteAppointmentItem(int id);
+    @Select("SELECT * FROM store_appointment_item WHERE openAppointment=1")
+    List<AppointmentItem> getOpenAppointmentItemList();
 }

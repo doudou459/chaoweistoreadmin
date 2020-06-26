@@ -12,7 +12,7 @@ public interface AppointmentOrderMapper {
     @Select("SELECT * FROM store_appointment_order WHERE customerId=#{customerID}")
     List<AppointmentOrder> getAppointmentOrderBycustomerID(int customerID);
 
-    @Select("SELECT * FROM store_appointment_order WHERE id BETWEEN #{beginTime} AND #{endTime}")
+    @Select("SELECT * FROM store_appointment_order WHERE appointmentTime BETWEEN #{beginTime} AND #{endTime} ORDER BY appointmentTime ")
     List<AppointmentOrder> getAppointmentOrderByTime(long beginTime,long endTime);
 
      @Insert("INSERT INTO store_appointment_order (id,customerId,customerName,phone,itemName,appointmentTime,openid_min,state) VALUE" +
