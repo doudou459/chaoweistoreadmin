@@ -5,6 +5,7 @@ public class AppointmentOrder {
     private int customerId;
     private String customerName;
     private String phone;
+    private int itemId;
     private String itemName;
     private long appointmentTime;
     private String openid_min;
@@ -40,6 +41,14 @@ public class AppointmentOrder {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
     public String getItemName() {
@@ -81,7 +90,8 @@ public class AppointmentOrder {
                 ", customerId=" + customerId +
                 ", customerName='" + customerName + '\'' +
                 ", phone='" + phone + '\'' +
-                ", itemNamel='" + itemName + '\'' +
+                ", itemId=" + itemId +
+                ", itemName='" + itemName + '\'' +
                 ", appointmentTime=" + appointmentTime +
                 ", openid_min='" + openid_min + '\'' +
                 ", state='" + state + '\'' +

@@ -21,14 +21,18 @@ public interface UserMapper {
     @Select("SELECT * FROM store_users WHERE wx_unionid=#{Unionid}")
     User getUserByUnionid(String Unionid);
 
-    @Insert("INSERT INTO store_users (nick_name,touxiang,sex,wx_openid_min,wx_openid_mp,wx_unionid,user_level) VALUE (" +
-            "#{nick_name},#{touxiang},#{sex},#{wx_openid_min},#{wx_openid_mp},#{wx_unionid},#{user_level})")
+    @Insert("INSERT INTO store_users (nick_name,touxiang,sex,wx_openid_min,wx_openid_mp,wx_unionid,user_level,phone) VALUE (" +
+            "#{nick_name},#{touxiang},#{sex},#{wx_openid_min},#{wx_openid_mp},#{wx_unionid},#{user_level},#{phone})")
     int addUser(@Param("nick_name") String nick_name, @Param("touxiang") String touxiang, @Param("sex") String sex,
                 @Param("wx_openid_min") String wx_openid_min, @Param("wx_openid_mp") String wx_openid_mp,
-                @Param("wx_unionid") String wx_unionid, @Param("user_level") int user_level);
+                @Param("wx_unionid") String wx_unionid, @Param("user_level") int user_level,@Param("phone") String phone);
     @Update("UPDATE store_users SET nick_name=#{nick_name},touxiang=#{touxiang},sex=#{sex},wx_openid_min=#{wx_openid_min}," +
-            "wx_openid_mp=#{wx_openid_mp},wx_unionid=#{wx_unionid},user_level=#{user_level} WHERE id=#{id}")
+            "wx_openid_mp=#{wx_openid_mp},wx_unionid=#{wx_unionid},user_level=#{user_level},phone=#{phone} WHERE id=#{id}")
     int editUser(@Param("id") int id,@Param("nick_name") String nick_name,@Param("touxiang") String touxiang,
                  @Param("sex") String sex,@Param("wx_openid_min") String wx_openid_min,
-                 @Param("wx_openid_mp") String wx_openid_mp,@Param("wx_unionid") String wx_unionid,@Param("user_level") int user_level);
+                 @Param("wx_openid_mp") String wx_openid_mp,@Param("wx_unionid") String wx_unionid,@Param("user_level") int user_level,@Param("phone") String phone);
+
+    @Select("SELECT * FROM store_users WHERE phone=#{phone}")
+    User getUserByPhone(String phone);
+
 }

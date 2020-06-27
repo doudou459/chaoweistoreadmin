@@ -16,9 +16,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String addUser(String nick_name, String touxiang, String sex, String wx_openid_min, String wx_openid_mp, String wx_unionid, int user_level) {
+    public String addUser(String nick_name, String touxiang, String sex, String wx_openid_min, String wx_openid_mp, String wx_unionid, int user_level,String phone) {
         String result="fail";
-        int rowCount= userMapper.addUser(nick_name, touxiang, sex, wx_openid_min, wx_openid_mp, wx_unionid, user_level);
+        int rowCount= userMapper.addUser(nick_name, touxiang, sex, wx_openid_min, wx_openid_mp, wx_unionid, user_level,phone);
         if(rowCount==1){
             result="success";
         }
@@ -26,13 +26,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String editUser(int id, String nick_name, String touxiang, String sex, String wx_openid_min, String wx_openid_mp, String wx_unionid, int user_level) {
+    public String editUser(int id, String nick_name, String touxiang, String sex, String wx_openid_min, String wx_openid_mp, String wx_unionid, int user_level,String phone) {
         String result="fail";
-        int rowCount= userMapper.editUser(id, nick_name, touxiang, sex, wx_openid_min, wx_openid_mp, wx_unionid, user_level);
+        int rowCount= userMapper.editUser(id, nick_name, touxiang, sex, wx_openid_min, wx_openid_mp, wx_unionid, user_level,phone);
         if(rowCount==1){
             result="success";
         }
         return result;
+    }
+
+    @Override
+    public User getUserByphone(String phone) {
+        return userMapper.getUserByPhone(phone);
     }
 
 }

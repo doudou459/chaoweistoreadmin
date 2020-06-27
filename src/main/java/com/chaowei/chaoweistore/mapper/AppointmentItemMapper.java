@@ -23,4 +23,7 @@ public interface AppointmentItemMapper {
     int deleteAppointmentItem(int id);
     @Select("SELECT * FROM store_appointment_item WHERE openAppointment=1")
     List<AppointmentItem> getOpenAppointmentItemList();
+    @Select("SELECT * FROM store_appointment_item WHERE id=#{id}")
+    AppointmentItem getItemById(int id);
+
 }

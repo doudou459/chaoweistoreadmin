@@ -15,10 +15,10 @@ public interface AppointmentOrderMapper {
     @Select("SELECT * FROM store_appointment_order WHERE appointmentTime BETWEEN #{beginTime} AND #{endTime} ORDER BY appointmentTime ")
     List<AppointmentOrder> getAppointmentOrderByTime(long beginTime,long endTime);
 
-     @Insert("INSERT INTO store_appointment_order (id,customerId,customerName,phone,itemName,appointmentTime,openid_min,state) VALUE" +
-             " (#{id},#{customerId},#{customerName},#{phone},#{itemName},#{appointmentTime},#{openid_min},#{state})")
+     @Insert("INSERT INTO store_appointment_order (id,customerId,customerName,phone,itemId,itemName,appointmentTime,openid_min,state) VALUE" +
+             " (#{id},#{customerId},#{customerName},#{phone},#{itemId},#{itemName},#{appointmentTime},#{openid_min},#{state})")
     int addAppointmentOrder(@Param("id") long id, @Param("customerId") int customerId, @Param("customerName") String customerName,
-                               @Param("phone") String phone, @Param("itemName") String itemName, @Param("appointmentTime") long appointmentTime,
+                               @Param("phone") String phone,  @Param("itemId") int itemId,@Param("itemName") String itemName, @Param("appointmentTime") long appointmentTime,
                                @Param("openid_min") String openid_min, @Param("state") int state);
      @Update("UPDATE store_appointment_order SET appointmentTime=#{newTime},state='1' WHERE id=#{id}")
      int changeAppointmentTime(@Param("newTime") long newTime ,@Param("id") long id);
@@ -27,4 +27,7 @@ public interface AppointmentOrderMapper {
      int sureChange(@Param("id") long id);
     @Update("UPDATE store_appointment_order SET state='2' WHERE id=#{id}")
      int cancelOrder(@Param("id") long id);
+    @Select("SELECT * FROM store_appointment_order WHERE itemId=#{itemId} AND appointmentTime=#{appointmentTime}")
+    List<AppointmentOrder> checkAppointmenNum(@Param("itemId") int itemId,@Param("appointmentTime") long appointmentTime);
+
 }

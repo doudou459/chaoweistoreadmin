@@ -52,4 +52,9 @@ public class AppointmentItemServiceImpl implements AppointmentItemService {
     public List<AppointmentItem> getOpenAppointmentItemList() {
         return appointmentItemMapper.getOpenAppointmentItemList();
     }
+
+    @Override
+    public AppointmentItem getItemById(int id) {
+        return appointmentItemMapper.getItemById(id);
+    }
 }

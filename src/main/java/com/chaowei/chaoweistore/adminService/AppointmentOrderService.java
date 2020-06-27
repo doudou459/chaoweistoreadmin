@@ -10,8 +10,8 @@ public interface AppointmentOrderService {
     String changeTime(long newTime,long id);
     String cancelOrder(long id);
     String sureChange(long id);
-    String addOrder( long id,  int customerId, String customerName, String phone,  String itemName,long appointmentTime,
+    String addOrder( long id,  int customerId, String customerName, String phone,int itemId , String itemName,long appointmentTime,
                      String openid_min,  int state);
-
+    List<AppointmentOrder> checkAppointmenNum(int itemId,long appointmentTime);
 
 }

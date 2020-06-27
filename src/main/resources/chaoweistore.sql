@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `store_admin` (
 DELETE FROM `store_admin`;
 /*!40000 ALTER TABLE `store_admin` DISABLE KEYS */;
 INSERT INTO `store_admin` (`id`, `loginID`, `loginKey`, `roles`, `loginTime`, `wrongTime`, `lastLoginTime`, `wx_openid_mp`, `wx_openid_min`, `wx_unionid`, `nick_name`, `touxiang`) VALUES
-	(000000001, 'root', 'e10adc3949ba59abbe56e057f20f883e', '1', 1589556268902, 00, 1589556268902, '', '', '', '', ''),
+	(000000001, 'root', 'e10adc3949ba59abbe56e057f20f883e', '1', 1593266467424, 00, 1593266467424, '', '', '', '', ''),
 	(000000002, '2', 'e10adc3949ba59abbe56e057f20f883e', '6', 1588415572521, 00, 1588415572521, '', '', '', '', ''),
 	(000000003, '3', 'e10adc3949ba59abbe56e057f20f883e', '3', 1588415266048, 00, 1588415266048, '', '', '', '', ''),
 	(000000004, 'admin', 'e10adc3949ba59abbe56e057f20f883e', '2', 1588415708330, 00, 1588415708330, '', '', '', '', '');
@@ -72,16 +72,40 @@ CREATE TABLE IF NOT EXISTS `store_appointment_order` (
   `customerName` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '预约用户姓名',
   `phone` varchar(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '预约用户电话',
   `itemName` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '预约事项名称',
+  `itemId` int(9) DEFAULT NULL COMMENT '预约事项id',
   `appointmentTime` bigint(13) DEFAULT NULL COMMENT '预约时间',
   `openid_min` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户微信小程序openid',
-  `state` int(1) DEFAULT NULL COMMENT '预约状态（0：正常，1：修改待确认，2：已取消）',
+  `state` int(1) DEFAULT NULL COMMENT '预约状态（0：正常，1：修改待确认，2：已取消,3：已完成）',
   PRIMARY KEY (`id`),
-  KEY `customerId` (`customerId`)
+  KEY `customerId` (`customerId`),
+  KEY `appointmentTime` (`appointmentTime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='预约订单';
 
--- 正在导出表  chaoweistore.store_appointment_order 的数据：~0 rows (大约)
+-- 正在导出表  chaoweistore.store_appointment_order 的数据：~12 rows (大约)
 DELETE FROM `store_appointment_order`;
 /*!40000 ALTER TABLE `store_appointment_order` DISABLE KEYS */;
+INSERT INTO `store_appointment_order` (`id`, `customerId`, `customerName`, `phone`, `itemName`, `itemId`, `appointmentTime`, `openid_min`, `state`) VALUES
+	(2, 2, '李四', '36523', '染发', NULL, 1591420536363, '235', 0),
+	(3, 3, '周五', '54331', '烫发', NULL, 1591424136364, '55', 0),
+	(4, 4, '王二', '562121', '洗头', NULL, 1591431336365, '4545', 0),
+	(5, 5, '张六', '55121', '剪头发', NULL, 1591434936365, '1453', 0),
+	(6, 6, '刘七', '412', '染发', NULL, 1591438536366, '454', 0),
+	(7, 7, '赵八', '4456', '烫发', NULL, 1591442136366, '451213', 0),
+	(8, 8, '朱九', '46123', '洗头', NULL, 1591449336367, '4561', 0),
+	(9, 6, '王二六', '12422', '剪头发', NULL, 1591420536362, NULL, 0),
+	(10, 7, '李五三', '2321', '剪头发', NULL, 1591420536361, NULL, 0),
+	(11, 8, '张李九', '111', '洗头', NULL, 1591420536360, '32', 3),
+	(12, 42, '色柔肤水', '32', '安抚师范生的风格', NULL, 1591420536359, NULL, 0),
+	(1591438427848, 1, '张三', '123456', '剪头发', NULL, 1591406136363, '123', 3),
+	(1593266628089, 952700, '张三', '15928641312', '美白（上午）', 12, 1593309600000, '', 0),
+	(1593266874799, 952700, '李武', '18980113709', '美白（下午）', 13, 1593325800000, '', 0),
+	(1593267139912, 952700, '李四', '15928641312', '美白（上午）', 12, 1593307800000, '', 0),
+	(1593267329344, 952700, '王六', '15928641312', '美白（上午）', 12, 1593307800000, '', 0),
+	(1593267482687, 952700, '李四', '1232', '美白（上午）', 12, 1593302400000, '', 0),
+	(1593267593887, 952700, '33', '33', '美白（上午）', 12, 1593295200000, '', 0),
+	(1593268301773, 952700, 'd', '1', '美白（下午）', 13, 1594449000000, '', 0),
+	(1593268642292, 952700, '4', '4', '美白（上午）', 12, 1593307800000, '', 0),
+	(1593268744395, 952700, '4', '4', '美白（上午）', 12, 1593295200000, '', 0);
 /*!40000 ALTER TABLE `store_appointment_order` ENABLE KEYS */;
 
 -- 导出  表 chaoweistore.store_carousel 结构
@@ -230,10 +254,12 @@ CREATE TABLE IF NOT EXISTS `store_users` (
   `wx_openid_mp` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '微信公众号openid',
   `wx_unionid` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '微信unionid',
   `user_level` int(2) NOT NULL DEFAULT '0' COMMENT '用户等级（默认0，数字越大vip等级越高）',
+  `phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '联系电话',
   PRIMARY KEY (`id`),
   KEY `wx_unionid` (`wx_unionid`),
   KEY `wx_openid_mp` (`wx_openid_mp`),
-  KEY `wx_openid_min` (`wx_openid_min`)
+  KEY `wx_openid_min` (`wx_openid_min`),
+  KEY `phone` (`phone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户表';
 
 -- 正在导出表  chaoweistore.store_users 的数据：~0 rows (大约)

@@ -10,6 +10,16 @@ public class User {
     private String wx_unionid;
     private int user_level;
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    private String phone;
+
     public int getId() {
         return id;
     }
@@ -85,6 +95,7 @@ public class User {
                 ", wx_openid_mp='" + wx_openid_mp + '\'' +
                 ", wx_unionid='" + wx_unionid + '\'' +
                 ", user_level=" + user_level +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }
